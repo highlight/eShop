@@ -5,6 +5,12 @@ var builder = WebApplication.CreateBuilder(args);
 builder.AddServiceDefaults();
 builder.AddApplicationServices();
 builder.Services.AddProblemDetails();
+builder.Services
+    .AddHighlightInstrumentation(options =>
+    {
+        options.ProjectId = "kgrjymnd";
+        options.ServiceName = "catalog";
+    });
 
 var withApiVersioning = builder.Services.AddApiVersioning();
 

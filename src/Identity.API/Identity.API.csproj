@@ -11,6 +11,7 @@
     <PackageReference Include="Duende.IdentityServer.EntityFramework" />
     <PackageReference Include="Duende.IdentityServer.Storage" />
     <PackageReference Include="Duende.IdentityServer" />
+    <PackageReference Include="Highlight.ASPCore" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools">

@@ -1,9 +1,16 @@
 ﻿using eShop.AppHost;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = DistributedApplication.CreateBuilder(args);
 
 builder.AddForwardedHeaders();
+builder.Services
+    .AddHighlightInstrumentation(options =>
+    {
+        options.ProjectId = "kgrjymnd";
+        options.ServiceName = "app-host";
+    });
 
 var redis = builder.AddRedis("redis");
 var rabbitMq = builder.AddRabbitMQ("eventbus");
@@ -72,12 +79,12 @@ var webApp = builder.AddProject<Projects.WebApp>("webapp", launchProfileName)
     .WithEnvironment("IdentityUrl", identityEndpoint);
 
 // set to true if you want to use OpenAI
-bool useOpenAI = false;
+bool useOpenAI = true;
 if (useOpenAI)
 {
     const string openAIName = "openai";
     const string textEmbeddingName = "text-embedding-3-small";
-    const string chatModelName = "gpt-35-turbo-16k";
+    const string chatModelName = "gpt-4o-mini";
 
     // to use an existing OpenAI resource, add the following to the AppHost user secrets:
     // "ConnectionStrings": {
@@ -98,7 +105,7 @@ if (useOpenAI)
         //   "Location": "<location>"
         // }
         openAI = builder.AddAzureOpenAI(openAIName)
-            .AddDeployment(new AzureOpenAIDeployment(chatModelName, "gpt-35-turbo", "0613"))
+            .AddDeployment(new AzureOpenAIDeployment(chatModelName, "gpt-4o-mini", "0613"))
             .AddDeployment(new AzureOpenAIDeployment(textEmbeddingName, "text-embedding-3-small", "1"));
     }
 

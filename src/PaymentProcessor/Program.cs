@@ -1,4 +1,10 @@
 ﻿var builder = WebApplication.CreateBuilder(args);
+builder.Services
+    .AddHighlightInstrumentation(options =>
+    {
+        options.ProjectId = "kgrjymnd";
+        options.ServiceName = "payments";
+    });
 
 builder.AddServiceDefaults();
 

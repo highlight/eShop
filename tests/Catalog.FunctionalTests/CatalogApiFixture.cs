@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc.Testing;
 
 namespace eShop.Catalog.FunctionalTests;
 
+using Microsoft.Extensions.DependencyInjection;
+
 public sealed class CatalogApiFixture : WebApplicationFactory<Program>, IAsyncLifetime
 {
     private readonly IHost _app;
@@ -14,6 +16,12 @@ public sealed class CatalogApiFixture : WebApplicationFactory<Program>, IAsyncLi
     {
         var options = new DistributedApplicationOptions { AssemblyName = typeof(CatalogApiFixture).Assembly.FullName, DisableDashboard = true };
         var appBuilder = DistributedApplication.CreateBuilder(options);
+        appBuilder.Services
+            .AddHighlightInstrumentation(options =>
+            {
+                options.ProjectId = "kgrjymnd";
+                options.ServiceName = "catalog-api";
+            });
         Postgres = appBuilder.AddPostgres("CatalogDB")
             .WithImage("ankane/pgvector")
             .WithImageTag("latest");

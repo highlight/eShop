@@ -1,11 +1,18 @@
 ﻿using eShop.WebApp.Components;
 using eShop.ServiceDefaults;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.AddServiceDefaults();
 
 builder.Services.AddRazorComponents().AddInteractiveServerComponents();
+builder.Services
+    .AddHighlightInstrumentation(options =>
+    {
+        options.ProjectId = "kgrjymnd";
+        options.ServiceName = "web-app";
+    });
 
 builder.AddApplicationServices();
 

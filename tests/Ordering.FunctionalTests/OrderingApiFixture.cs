@@ -17,6 +17,12 @@ public sealed class OrderingApiFixture : WebApplicationFactory<Program>, IAsyncL
     {
         var options = new DistributedApplicationOptions { AssemblyName = typeof(OrderingApiFixture).Assembly.FullName, DisableDashboard = true };
         var appBuilder = DistributedApplication.CreateBuilder(options);
+        appBuilder.Services
+            .AddHighlightInstrumentation(options =>
+            {
+                options.ProjectId = "kgrjymnd";
+                options.ServiceName = "ordering-api";
+            });
         Postgres = appBuilder.AddPostgres("OrderingDB");
         IdentityDB = appBuilder.AddPostgres("IdentityDB");
         IdentityApi = appBuilder.AddProject<Projects.Identity_API>("identity-api").WithReference(IdentityDB);

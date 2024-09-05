@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Highlight.ASPCore" />
     <PackageReference Include="MediatR" />
     <PackageReference Include="System.Reflection.TypeExtensions" />
   </ItemGroup>

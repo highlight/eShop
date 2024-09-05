@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Highlight.ASPCore" />
     <PackageReference Include="Yarp.ReverseProxy" />
     <PackageReference Include="Microsoft.Extensions.ServiceDiscovery.Yarp" />
     <PackageReference Include="AspNetCore.HealthChecks.Uris" />
